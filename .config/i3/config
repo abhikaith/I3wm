@@ -1,0 +1,411 @@
+##
+## i3 config
+##
+# Screen brightness controls with notification
+bindsym XF86MonBrightnessUp exec "light -A 5
+bindsym XF86MonBrightnessDown exec "light -U 5
+exec --no-startup-id compton --config ~/.config/i3/compton.conf -b
+exec ~/.config/i3/start-conkys.sh
+
+#volicon
+#exec --no-startup-id volumeicon
+# Set inner/outer gaps
+gaps inner 13
+gaps outer 0
+
+##Needed for i3-gaps
+#hide_edge_borders both
+for_window [class="^.*"] border pixel 0 
+#gaps inner 11
+#gaps outer 11
+
+#MUSIC:
+##For moc:
+set $music mocp
+set $pause --no-startup-id mocp -G 
+set $next --no-startup-id mocp -f
+set $prev --no-startup-id mocp -r
+set $lilfor --no-startup-id mocp -k 10
+set $bigfor --no-startup-id mocp -k 120
+set $lilbak --no-startup-id mocp -k -10
+set $bigbak --no-startup-id mocp -k -120
+set $beg --no-startup-id mocp -j 0%
+
+bindsym $mod+Shift+space    floating toggle
+bindsym $mod+space      focus mode_toggle
+
+bindsym $mod+Escape     workspace prev
+bindsym $mod+Shift+Escape   exec i3-msg exit
+
+#bindsym $mod+BackSpace     exec $term
+bindsym $mod+Shift+BackSpace    exec reboot
+
+bindsym $mod+Tab        workspace back_and_forth
+
+#Letter Keys
+
+bindsym $mod+q      kill
+bindsym $mod+Shift+q    kill
+
+bindsym $mod+w      exec qutebrowser
+bindsym $mod+Shift+w    exec --no-startup-id $browser
+
+bindsym $mod+e      exec $term -e "mutt -F ~/.config/mutt/muttrc"
+bindsym $mod+Shift+e    exec --no-startup-id icedove ; exec --no-startup-id thunderbird
+
+bindsym $mod+r      exec $term -e ranger
+bindsym $mod+Shift+r    restart
+
+bindsym $mod+t      split toggle
+bindsym $mod+Shift+t    gaps inner current set 15; gaps outer current set 15
+
+bindsym $mod+y      exec $term -e "calcurse -D $HOME/.config/calcurse/"
+bindsym $mod+Shift+y    resize shrink width 10 px or 10ppt
+
+bindsym $mod+u      exec --no-startup-id mupdf #~/.config/Scripts/luke_guide.pdf
+bindsym $mod+Shift+u    resize shrink height 10 px or 10 ppt
+
+bindsym $mod+i      exec $term -e htop
+bindsym $mod+Shift+i    resize grow height 10 px or 10 ppt
+
+bindsym $mod+o      exec --no-startup-id $beg
+bindsym $mod+Shift+o    resize grow width 10 px or 10 ppt
+
+bindsym $mod+p      exec $pause
+bindsym $mod+Shift+p    exec pinta
+
+bindsym $mod+a      exec $term -e qalc
+bindsym $mod+Shift+a    exec pavucontrol
+
+bindsym $mod+s      gaps inner current plus 5
+bindsym $mod+Shift+s    gaps inner current minus 5
+
+bindsym $mod+d      exec rofi -show run
+bindsym $mod+Shift+d    gaps inner current set 0; gaps outer current set 0
+
+bindsym $mod+f      fullscreen toggle
+bindsym $mod+Shift+f    exec --no-startup-id syncthing -home="~/.syncthing"
+
+bindsym $mod+g      workspace prev
+bindsym $mod+Shift+g    exec --no-startup-id gimp; workspace $ws5
+
+bindsym $mod+h      focus left
+bindsym $mod+Shift+h    move left 30
+
+bindsym $mod+j      focus down
+bindsym $mod+Shift+j    move down 30
+
+bindsym $mod+k      focus up
+bindsym $mod+Shift+k    move up 30
+
+bindsym $mod+l      focus right
+bindsym $mod+Shift+l    move right 30
+
+bindsym $mod+z      gaps outer current plus 5
+bindsym $mod+Shift+z    gaps outer current minus 5
+
+bindsym $mod+x      exec --no-startup-id ~/.config/i3/lock.sh
+bindsym $mod+Shift+x    exec shutdown now
+
+bindsym $mod+c      exec $term -e weechat
+bindsym $mod+Shift+c    exec --no-startup-id audacity
+
+bindsym $mod+v      exec $term -e vis
+bindsym $mod+Shift+v    exec --no-startup-id projectM-pulseaudio
+
+bindsym $mod+b      exec $prev
+bindsym $mod+Shift+b    exec --no-startup-id blender; workspace $ws6
+
+bindsym $mod+n      exec $next
+bindsym $mod+Shift+n    exec $term -e newsbeuter
+
+bindsym $mod+m      exec $term -e $music
+bindsym $mod+Shift+m    exec --no-startup-id pamixer -t
+
+bindsym $mod+semicolon  workspace next
+bindsym $mod+apostrophe split horizontal ;; exec $term
+bindsym $mod+slash  split vertical ;; exec $term
+bindsym $mod+Shift+slash    kill
+bindsym $mod+backslash  workspace back_and_forth
+#END
+
+#Function Buttons
+bindsym F1      exec --no-startup-id echo "help" > /dev/null
+#bindsym F2
+#bindsym F3
+#bindsym F4
+#bindsym F5
+#bindsym F6
+#bindsym F7
+#bindsym F8
+#bindsym F9
+#bindsym F10
+bindsym F11     fullscreen toggle
+#bindsym F12
+
+#bindsym $mod+F1
+#bindsym $mod+F2
+#bindsym $mod+F3     exec --no-startup-id arandr
+#bindsym $mod+F4     exec --no-startup-id sudo systemctl suspend
+#bindsym $mod+F5     exec --no-startup-id sudo systemctl restart NetworkManager
+#bindsym $mod+F6         exec --no-startup-id sudo systemctl 
+#bindsym $mod+F7     exec transset-df -a --dec .15
+#bindsym $mod+F8     exec transset-df -a --inc .15
+#bindsym $mod+F9     exec --no-startup-id sudo bash ~/.config/i3/mount.sh
+#bindsym $mod+F10    exec --no-startup-id sudo bash ~/.config/i3/unmount.sh
+#bindsym $mod+F11   
+#bindsym $mod+F12    exec --no-startup-id marble
+
+#Arrow Keys
+bindsym $mod+Left   focus left
+bindsym $mod+Down   focus down
+bindsym $mod+Up     focus up
+bindsym $mod+Right  focus right
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up   move up
+bindsym $mod+Shift+Right move right
+#END
+
+
+
+
+##
+## Autostart
+##
+#exec --no-startup-id "dunst -config ~/.dunstrc"
+#exec --no-startup-id "volnoti"
+#exec --no-startup-id "dropbox"
+exec_always --no-startup-id feh --bg-scale ~/.config/wall.jpg
+
+#exec --no-startup-id "i3-msg 'workspace 0:::ArchLinux'"
+#exec --no-startup-id "nm-applet"
+##
+## Variables
+##
+## Mod-keys ##
+set $mod Mod4
+
+## Terminal ##
+#set $tmx urxvt -e ~/bin/zsh
+set $term termite
+
+bindsym $mod+Return         exec $term
+bindsym $mod+Shift+Return   exec $term -e urxvt
+floating_modifier $mod
+set $screencast  ffmpeg -y -f x11grab -video_size 1280x800 -i :0.0 -f alsa -i default -c:v ffvhuff -r 30 -c:a flac output.mkv
+set $audio ffmpeg -f alsa -i default -c:a flac -y output.flac
+set $browser firefox
+
+
+
+
+## Workspaces ##
+set $ws1 "1: Home"
+set $ws2 "2: "
+set $ws3 "3: "
+set $ws4 "4: Vim"
+set $ws5 "5: "
+set $ws6 "6: "
+set $ws7 "7: "
+set $ws8 "8: "
+set $ws9 "9: "
+set $ws10 "10: "
+
+# switch to workspace
+bindsym $mod+1      workspace $ws1
+bindsym $mod+2      workspace $ws2
+bindsym $mod+3      workspace $ws3
+bindsym $mod+4      workspace $ws4
+bindsym $mod+5      workspace $ws5
+bindsym $mod+6      workspace $ws6
+bindsym $mod+7      workspace $ws7
+bindsym $mod+8      workspace $ws8
+bindsym $mod+9      workspace $ws9
+bindsym $mod+0      workspace $ws10
+
+# move focused container to workspace
+bindsym $mod+Shift+1    move container to workspace $ws1
+bindsym $mod+Shift+2    move container to workspace $ws2
+bindsym $mod+Shift+3    move container to workspace $ws3
+bindsym $mod+Shift+4    move container to workspace $ws4
+bindsym $mod+Shift+5    move container to workspace $ws5
+bindsym $mod+Shift+6    move container to workspace $ws6
+bindsym $mod+Shift+7    move container to workspace $ws7
+bindsym $mod+Shift+8    move container to workspace $ws8
+bindsym $mod+Shift+9    move container to workspace $ws9
+bindsym $mod+Shift+0    move container to workspace $ws10
+
+for_window [class="Blender"] move to workspace $ws6
+for_window [class="Icedove"] move to workspace $ws9
+for_window [class="marble"] move to workspace $ws7
+for_window [class="Thunderbird"] move to workspace $ws9
+for_window [class="Iceweasel"] move to workspace $ws2
+for_window [title="GIMP Startup"] move workspace $ws5
+for_window [class="Gimp"] move workspace $ws5
+for_window [window_role="gimp-dock"] floating disable; move left; resize shrink width 50 px or 50ppt
+for_window [window_role="gimp-toolbox"] floating disable; move right; resize grow width 30 px or 30ppt
+for_window [window_role="tr-main"] move to workspace $ws8
+
+#Media
+bindsym $mod+plus       exec --no-startup-id pamixer -i 5
+bindsym $mod+Shift+plus     exec --no-startup-id pamixer -i 15
+
+bindsym $mod+minus      exec --no-startup-id pamixer -d 5
+bindsym $mod+Shift+minus    exec --no-startup-id pamixer -d 15
+
+bindsym $mod+bracketleft    exec $lilbak
+bindsym $mod+Shift+bracketleft  exec $bigbak
+
+bindsym $mod+bracketright   exec $lilfor
+bindsym $mod+Shift+bracketright exec $bigfor
+
+bindsym $mod+greater        exec --no-startup-id pamixer -i 5
+bindsym $mod+Shift+greater  exec --no-startup-id pamixer -i 15
+
+bindsym $mod+less       exec --no-startup-id pamixer -d 5
+bindsym $mod+Shift+less     exec --no-startup-id pamixer -d 15
+
+bindsym Print           exec --no-startup-id scrot
+bindsym Shift+Print         exec --no-startup-id scrot -u
+
+bindsym Scroll_Lock     exec --no-startup-id $audio
+bindsym $mod+Scroll_Lock    exec --no-startup-id killall ffmpeg
+
+bindsym Pause           exec --no-startup-id $screencast
+bindsym $mod+Pause      exec --no-startup-id killall ffmpeg
+
+bindsym XF86Launch1     exec --no-startup-id killall ffmpeg
+
+bindsym XF86AudioPlay       exec $pause
+bindsym XF86AudioPause      exec $pause
+bindsym XF86AudioNext       exec $next
+bindsym XF86AudioPrev       exec $prev
+bindsym XF86AudioStop       exec $pause
+
+bindsym XF86AudioRaiseVolume    exec --no-startup-id pamixer -i 5
+bindsym XF86AudioLowerVolume    exec --no-startup-id pamixer -d 5
+bindsym XF86AudioMute       exec --no-startup-id pamixer -t
+#END
+
+bindsym XF86Mail        exec $term -e "mutt -F ~/.config/mutt/muttrc"
+#bindsym XF86MyComputer     exec
+#bindsym $mod+XF86MyComputer    exec
+bindsym XF86HomePage        exec --no-startup-id qutebrowser lukesmith.xyz
+bindsym $mod+XF86HomePage   exec --no-startup-id $browser
+bindsym $mod+XF86WWW        exec --no-startup-id $browser
+
+bindsym XF86Calculator      exec $term -e qalc
+
+##
+## Borders, and titles
+##
+
+font pango:Terminus 10
+for_window [class="Obshutdown"] floating enable
+
+## Hide titles ##
+#for_window [class="Firefox" instance="Navigator"] border none
+#for_window [class="utox" instance="utox"] border none
+#for_window [class="NetBeans IDE 8.0.2" instance="sun-awt-X11-XFramePeer"] border none
+
+## Size of border ##
+new_window pixel 3
+
+
+##
+## Colors
+##
+
+## Default ##
+# client.focused            #1990B7 #1990B7 #1990B7 #1990B7
+# client.focused_inactive   #333333 #5f676a #ffffff #484e50
+# client.unfocused          #333333 #222222 #888888 #292d2e
+# client.urgent             #2f343a #900000 #ffffff #900000
+
+# class                   border  backgr. text    indicator
+client.focused            #1990B7 #1990B7 #111111 #1990B7
+client.focused_inactive   #1c1c1c #1c1c1c #5f676a
+client.unfocused          #1c1c1c #1c1c1c #888888 #222222
+client.urgent             #2f343a #009000 #ffffff #009000
+
+
+# lock screen
+#bindsym $super+Ctrl+l exec --no-startup-id i3lock-fancy
+
+# atom
+#bindsym $super+m exec --no-startup-id atom
+
+##
+## WND mode
+##
+
+#bindsym $super+r mode "WND"
+
+#mode "WND" {
+    
+ #   bindsym $left resize shrink width 1 px or 1 ppt
+  #  bindsym $down resize shrink height 1 px or 1 ppt
+   # bindsym $up resize grow height 1 px or 1 ppt
+   # bindsym $right resize grow width 1 px or 1 ppt
+
+    ## Title / show / hide border ##
+    #bindsym o border toggle
+
+    ## Back to normal ##
+    #bindsym Escape mode "default"
+#}
+
+
+## Obshutdown ##
+#bindsym $alt+o exec obshutdown -c ~/.config/obshutdown.rc
+
+
+
+## Support NumPad with code-keys ##
+#     [+] [-] |      [86] [82]
+# [7] [8] [9] | [79] [80] [81]
+# [4] [5] [6] | [83] [84] [85]
+# [1] [2] [3] | [87] [88] [89]
+#     [0]     |      [90]
+
+
+##
+## Bar
+##
+
+bar {
+    #i3bar_command           ~/.config/i3/lemonbar/i3_lemonbar.py
+    #strip_workspace_numbers yes
+    font                    pango:Terminus 10
+    status_command          i3blocks -c ~/.config/i3/i3blocks.conf 
+    workspace_buttons       yes
+    #tray_output            none
+    separator_symbol        " "
+    position                top    colors 
+    {
+        background #1b1b1b
+        separator  #ffffff
+        statusline #999999
+        focused_workspace  #000000 #1990B7 #1c1c1c
+        active_workspace   #000000 #333333 #999999
+        inactive_workspace #000000 #333333 #999999
+        urgent_workspace   #000000 #ff5151 #1c1c1c
+    }
+}
+
+set $audiomenu "volume:  [+]10%  [-]10%  [m]ute  [r]eset"
+bindsym $mod+F11         mode $audiomenu
+
+mode $audiomenu {
+    bindsym r             exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -- 100%
+    bindsym plus          exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -- +10%
+    bindsym KP_Add        exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -- +10%
+    bindsym minus         exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -- -10%
+    bindsym KP_Subtract   exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -- -10%
+    bindsym m             exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
+    bindsym Return        mode "default"
+    bindsym Escape        mode "default"
+}
+
+
